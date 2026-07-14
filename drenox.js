@@ -23,7 +23,7 @@ const { exec } = require('child_process')
 const googleTTS = require('google-tts-api')
 const yts = require('yt-search')
 const ytdl = require('@distube/ytdl-core')
-const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE'; 
+const GROQ_API_KEY = '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'; 
 //const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const { writeExif, imageToWebp, videoToWebp, writeExifImg, writeExifVid, addExif } = require('./allfunc/exif');
 
