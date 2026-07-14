@@ -6356,9 +6356,6 @@ case 'song': {
 
     const yts = require('yt-search')
     const axios = require('axios')
-    const { exec } = require('child_process')
-    const util = require('util')
-    const execPromise = util.promisify(exec)
     const fs = require('fs')
     const path = require('path')
 
@@ -6405,30 +6402,20 @@ case 'song': {
       throw new Error('API returned no download URL')
     }
 
-    // 4️⃣ Download M4A to temp file
-    const tempDir = path.join('/tmp', `yt-${Date.now()}`)
-    fs.mkdirSync(tempDir, { recursive: true })
-    const m4aFile = path.join(tempDir, 'input.m4a')
-    const mp3File = path.join(tempDir, 'output.mp3')
-
+    // 4️⃣ Download MP3 directly (API already returns MP3)
     const audioRes = await axios.get(data.downloadURL, {
       responseType: 'arraybuffer',
       timeout: 120000,
       headers: { 'User-Agent': 'Mozilla/5.0' }
     })
 
-    fs.writeFileSync(m4aFile, Buffer.from(audioRes.data))
+    const buffer = Buffer.from(audioRes.data)
 
-    // 5️⃣ Convert M4A → MP3 using ffmpeg
-    await execPromise(`ffmpeg -i "${m4aFile}" -vn -ar 44100 -ac 2 -b:a 128k -y "${mp3File}"`, { timeout: 60000 })
-
-    if (!fs.existsSync(mp3File) || fs.statSync(mp3File).size === 0) {
-      throw new Error('FFmpeg conversion failed')
+    if (!buffer || buffer.length === 0) {
+      throw new Error('Downloaded audio is empty')
     }
 
-    const buffer = fs.readFileSync(mp3File)
-
-    // 6️⃣ Send as proper MP3
+    // 5️⃣ Send as audio
     await bad.sendMessage(
       m.chat,
       {
@@ -6440,8 +6427,6 @@ case 'song': {
       { quoted: m }
     )
 
-    // Cleanup
-    fs.rmSync(tempDir, { recursive: true, force: true })
     await bad.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
 
   } catch (e) {
@@ -6451,6 +6436,7 @@ case 'song': {
   }
 }
 break
+ 
       //═══════════════════════════════════════════════════════════
 // TIKTOK - Download TikTok Videos
 // ═══════════════════════════════════════════════════════════
