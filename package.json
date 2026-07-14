@@ -1,7 +1,7 @@
 {
-  "name": "Syed-tech",
+  "name": "syed-md",
   "version": "2.0.0",
-  "description": "Powerful whatsapp bot created by talha",
+  "description": "Powerful whatsapp bot created by syed",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -17,7 +17,7 @@
     "multi-session",
     "pairing-bot"
   ],
-  "author": "talha",
+  "author": "syed",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
@@ -73,6 +73,7 @@
     "node-fetch": "^2.7.0",
     "node-id3": "^0.2.6",
     "node-telegram-bot-api": "^0.66.0",
+    "adm-zip": "^0.5.16",
     "node-webpmux": "^3.1.7",
     "node-youtube-music": "^0.8.3",
     "openai": "^4.69.0",
@@ -102,9 +103,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://t.me/Syed_MD_BOT"
+    "url": "https://t.me/syed_md_bot"
   },
   "bugs": {
-    "url": "https://t.me/SYED_MD_BOT"
+    "url": "https://t.me/syed_md_bot"
   }
 }

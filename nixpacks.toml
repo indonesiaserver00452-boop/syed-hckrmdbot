@@ -1,5 +1,0 @@
-[install]
-cmds = ["npm install --legacy-peer-deps"]
-
-[setup]
-nodeCanvasDependencies = ["python3", "pkg-config", "pixman", "cairo", "pango", "libjpeg", "giflib", "librsvg"]
